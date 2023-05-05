@@ -1,16 +1,14 @@
 <?php
 function theme_resources()
 {
-    wp_enqueue_style('style', get_stylesheet_uri());
     wp_enqueue_style('font-awesome', get_template_directory_uri() . '/fontawesome/css/all.css');
     wp_enqueue_style('bootstarp', get_template_directory_uri() . '/inc/bootstrap.css');
     wp_enqueue_style('fonts', get_template_directory_uri() . '/css/fonts.css');
-    wp_enqueue_style('normalize', get_template_directory_uri() . '/css/normalize.css');
     wp_enqueue_style('lightgallery', get_template_directory_uri() . '/css/lightgallery.css');
+    wp_enqueue_style('style', get_stylesheet_uri());
     wp_enqueue_script('script_lightgallery', get_template_directory_uri() . '/js/lightgallery-all.min.js', array('jquery'), null, true);
     wp_enqueue_script('script_mousewheel', get_template_directory_uri() . '/js/jquery.mousewheel.min.js', array('jquery'), null, true);
     wp_enqueue_script('script', get_template_directory_uri() . '/js/script.js', array('jquery'), null, true);
-    wp_enqueue_script('jquery', get_template_directory_uri() . './js/jquery-3.4.1.js', array('jquery'), null, true);
 }
 
 add_action('wp_enqueue_scripts', 'theme_resources');
@@ -20,6 +18,7 @@ function theme_set_up()
 {
     register_nav_menus(array(
         'header_menu' => 'Header Menu',
+        'trending_menu' => 'Trending Menu',
         'header_mobile_menu' => 'Header Mobile Menu',
         'footer_menu' => 'Footer Menu',
     ));
@@ -111,7 +110,6 @@ function shapeSpace_track_posts($post_id)
     shapeSpace_popular_posts($post_id);
 }
 add_action('wp_head', 'shapeSpace_track_posts');
-
 
 
 /* --------------Photo Gallary Customs Post Register----------------- */
@@ -264,12 +262,6 @@ function multi_media_uploader_meta_box_func($post)
 <?php
 }
 
-function v_three()
-{
-    $v_code = 'd586b0e554d2ae52aaffa4560d3e0c60';
-    return $v_code;
-}
-
 function multi_media_uploader_field($name, $value = '')
 {
     $image = '">Add Media';
@@ -311,18 +303,66 @@ function wc_meta_box_save($post_id)
     }
 }
 
-// To Support Custom Post Format iN dIffernetn Templae
+/* --------------Video Gallary  Customs Post Register----------------- */
 
-// function namespace_add_custom_types($query)
-// {
-//     if (is_single() || is_category() || is_tag() && empty($query->query_vars['suppress_filters'])) {
-//         $query->set('post_type', array(
-//             'post', 'nav_menu_item', 'photogallery','videogallery'
-//         ));
-//         return $query;
-//     }
-// }
-// add_filter('pre_get_posts', 'namespace_add_custom_types');
+function create__video_posttype()
+{
+    register_post_type(
+        'videogallery',
+        array(
+            'labels' => array(
+                'name' => __('Video gallery'),
+                'singular_name' => __('videogallery')
+            ),
+            'public' => true,
+            'menu_position'       => 5,
+            'supports'            => array('title', 'thumbnail',),
+            'has_archive' => true,
+            'rewrite' => array('slug' => 'videogallery'),
+            'taxonomies'  => array('videogallery', 'videogallery-category'),
+        )
+    );
+}
+add_action('init', 'create__video_posttype');
+
+//Add Custom Metabox
+function diwp_custom_metabox()
+{
+
+    add_meta_box('diwp-metabox', 'Youtube Video Link', 'diwp_custom_metabox_callback', 'videogallery', 'normal');
+}
+
+add_action('add_meta_boxes', 'diwp_custom_metabox');
+
+
+function diwp_custom_metabox_callback()
+{
+    global $post;
+?>
+<div class="row">
+  <div class="label">Like: https://www.youtube.com/watch?v=eQ_8F4nzyiw</div>
+  <div class="fields">
+    <input style="width: 100%;" type="text" name="_diwp_reading_time"
+      value="<?php echo get_post_meta($post->ID, 'post_reading_time', true) ?>" />
+  </div>
+</div>
+<?php
+
+}
+
+function diwp_save_custom_metabox()
+{
+
+    global $post;
+
+    if (isset($_POST["_diwp_reading_time"])) :
+
+        update_post_meta($post->ID, 'post_reading_time', $_POST["_diwp_reading_time"]);
+
+    endif;
+}
+
+add_action('save_post', 'diwp_save_custom_metabox');
 
 function get_breadcrumb()
 {
@@ -359,13 +399,15 @@ function get_breadcrumb()
 
 function wcr_share_buttons()
 {
-    $url = urlencode(get_the_permalink());
-    $title = urlencode(html_entity_decode(get_the_title(), ENT_COMPAT, 'UTF-8'));
-    $media = urlencode(get_the_post_thumbnail_url(get_the_ID(), 'full'));
-
     include(locate_template('inc/share-template.php', false, false));
 }
+
+require_once('inc/dateEngToBanglaConverter.php');
 
 require get_template_directory() . '/inc/ajax.php';
 
 require_once('inc/gs_functions.php');
+
+require_once('inc/taxonomy-img.php');
+
+require_once('inc/rewrite.php'); 

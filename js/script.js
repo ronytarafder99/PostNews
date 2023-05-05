@@ -108,39 +108,6 @@ jQuery(document).ready(function () {
     });
 
 
-    /* Ajax functions for cat*/
-    jQuery(document).on('click', '.sunset-load-more', function () {
-
-        var that = jQuery(this);
-        var page = jQuery(this).data('page');
-        var newPage = page + 1;
-        var ajaxurl = that.data('url');
-        var cat = that.data('category');
-        jQuery('.animation_image').css("display", "block");
-
-        jQuery.ajax({
-
-            url: ajaxurl,
-            type: 'post',
-            data: {
-                cat: cat,
-                page: page,
-                action: 'sunset_load_more'
-
-            },
-            error: function (response) {
-                console.log(response);
-            },
-            success: function (response) {
-
-                jQuery('.animation_image').css("display", "none");
-                that.data('page', newPage);
-                jQuery('.sunset-posts-container').append(response);
-
-            }
-        });
-    });
-
     // Url Copy to clipboard (Single page)
     var jQuerytemp = jQuery("<input>");
     var jQueryurl = jQuery(location).attr('href');
@@ -158,17 +125,26 @@ jQuery(document).ready(function () {
     })
 
     // print
-    function printData() {
-        var divToPrint = document.getElementById("printTable");
-        newWin = window.open("");
-        newWin.document.write(divToPrint.outerHTML);
-        newWin.print();
-        newWin.close();
-    }
-
     jQuery('.fa-print').on('click', function () {
-        printData();
+       window.print()
     })
+
+
+    jQuery('.topic-tab a').click(function(){
+        jQuery('.topic-tab a').removeClass('active');
+        jQuery(this).addClass('active');
+    });
+    
+    jQuery('.topic-tab a#topic-selected').click(function(){
+        jQuery('#nav-latest').hide();
+        jQuery('#nav-selected').show();
+    });
+    
+    jQuery('.topic-tab a#topic-latest').click(function(){
+        jQuery('#nav-latest').show();
+        jQuery('#nav-selected').hide();
+    });
+
 });
 
 function myFunction(x) {
